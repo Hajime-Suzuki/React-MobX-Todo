@@ -1,0 +1,37 @@
+{
+  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "rules": {
+    "jsx-no-multiline-js": false,
+    "jsx-boolean-value": false,
+    "jsx-curly-spacing": false,
+    "jsx-no-lambda": false,
+    "member-access": false,
+    "interface-name": false,
+    "object-literal-sort-keys": false,
+    "ordered-imports": false,
+    "ban-types": false,
+    "array-type": false,
+    "no-shadowed-variable": false, // temp
+    "no-console": false,
+    "arrow-parens": [true, "ban-single-arg-parens"],
+    "trailing-comma": false,
+    "curly": false,
+    "max-classes-per-file": false,
+    "no-unused-variable": false,
+    "quotemark": [true, "single", "jsx-double"],
+    "semicolon": [true, "never"],
+    "interface-over-type-literal": true
+  },
+  "linterOptions": {
+    "exclude": [
+      "config/**/*.js",
+      "node_modules/**/*.ts",
+      "coverage/lcov-report/*.js",
+      "src/registerServiceWorker.ts",
+      "src/serviceWorker.ts",
+      "src/graphql/components/**/*.tsx",
+      "src/graphql/@types/**/*.ts",
+      "src/_gql-gen/**/.js"
+    ]
+  }
+}
