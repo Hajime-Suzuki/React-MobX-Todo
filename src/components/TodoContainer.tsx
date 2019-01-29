@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Provider, inject, observer } from 'mobx-react'
 import Todos from 'src/mobx'
 import TodoList from './TodoList'
+import { Button } from '@material-ui/core'
 
 export interface TodoContainerChildProps {
   todos: Todos
@@ -13,7 +14,9 @@ class TodoContainer extends React.PureComponent {
   render() {
     return (
       <Provider todos={this.todos}>
-        <TodoList />
+        <>
+          <TodoList />
+        </>
       </Provider>
     )
   }

@@ -15,12 +15,28 @@ class Todos {
   ]
 
   @action addItem(name: string) {
-    this.todoList.push({
-      id: uuid(),
-      name,
-      done: false,
-      createdAt: new Date()
-    })
+    return () =>
+      this.todoList.push({
+        id: uuid(),
+        name,
+        done: false,
+        createdAt: new Date()
+      })
+  }
+
+  @action updateItem(id: string, data: Todo) {
+    return () => {
+      let target = this.todoList.find(todo => todo.id === id)
+      if (!target) return
+      const updatedTarget = { ...target, ...data }
+      target = updatedTarget
+    }
+  }
+
+  @action deleteItem(id: string) {
+    return () => {
+      this.todoList = this.todoList.filter(todo => todo.id !== id)
+    }
   }
 }
 
