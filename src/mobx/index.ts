@@ -24,13 +24,14 @@ class Todos {
       })
   }
 
-  @action updateItem(id: string, data: Todo) {
-    return () => {
-      let target = this.todoList.find(todo => todo.id === id)
-      if (!target) return
-      const updatedTarget = { ...target, ...data }
-      target = updatedTarget
-    }
+  @action updateItem(id: string, data: Partial<Todo>) {
+    const index = this.todoList.findIndex(todo => todo.id === id)
+    if (index === undefined) return
+
+    const target = this.todoList[index]
+    const updatedTarget = { ...target, ...data }
+
+    this.todoList[index] = updatedTarget
   }
 
   @action deleteItem(id: string) {

@@ -1,24 +1,29 @@
+import { inject, observer } from 'mobx-react'
 import * as React from 'react'
-import { Provider, inject, observer } from 'mobx-react'
+import { TodosConnectedProps } from 'src/App'
 import Todos from 'src/mobx'
 import TodoList from './TodoList'
-import { Button } from '@material-ui/core'
 
 export interface TodoContainerChildProps {
-  todos: Todos
+  todoList: Todos['todoList']
+  toggleDone: (id: string, done: boolean) => () => void
 }
 
-class TodoContainer extends React.PureComponent {
-  private todos = new Todos()
+@inject('todos')
+@observer
+class TodoContainer extends React.Component<Partial<TodosConnectedProps>> {
+  toggleDone: TodoContainerChildProps['toggleDone'] = (id, done) => () => {
+    this.props.todos!.updateItem(id, { done: !done })
+  }
 
   render() {
-    return (
-      <Provider todos={this.todos}>
-        <>
-          <TodoList />
-        </>
-      </Provider>
-    )
+    const { todos } = this.props
+    if (!todos) return null
+
+    const { todoList } = todos
+    if (!todoList.length) return 'No todo'
+
+    return <TodoList todoList={todoList} toggleDone={this.toggleDone} />
   }
 }
 
